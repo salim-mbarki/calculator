@@ -1,0 +1,15 @@
+.display {
+  border: solid 1px black;
+  padding: 15px;
+  margin-bottom: 10px;
+}
+
+.buttons {
+  display: flex;
+}
+
+button {
+  padding: 10px 40px;
+  margin: 2px;
+  width: 90px;
+}
