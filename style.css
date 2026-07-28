@@ -1,17 +1,40 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+}
+
+.container {
+  width: 100%;
+  max-width: 400px;
+  margin: 70px auto 0;
+}
+
 .display {
-  border: solid 1px black;
-  padding: 15px;
+  border: 1px solid #c9c9c9;
+  border-radius: 10px;
+  height: 60px;
   margin-bottom: 10px;
-  width: 350px;
-  height: 20px;
+  padding: 15px;
+  font-size: 20px;
+  text-align: right;
 }
 
 .buttons {
   display: flex;
+  justify-content: space-between;
 }
 
 button {
-  padding: 10px 40px;
-  margin: 2px;
   width: 90px;
+  height: 45px;
+  margin: 4px 0;
+  border: 0;
+  border-radius: 20px;
+  cursor: pointer;
+    
 }
