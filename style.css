@@ -11,14 +11,14 @@ body {
 .container {
   width: 100%;
   max-width: 400px;
-  margin: 70px auto 0;
+  margin: 90px auto 0;
 }
 
 .display {
   border: 1px solid #c9c9c9;
   border-radius: 10px;
   height: 60px;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
   padding: 15px;
   font-size: 20px;
   text-align: right;
@@ -26,13 +26,14 @@ body {
 
 .buttons {
   display: flex;
-  justify-content: space-between;
+  flex-direction: row-reverse;
+  flex-wrap: wrap-reverse;
+  gap: 10px;
 }
 
 button {
   width: 90px;
   height: 45px;
-  margin: 4px 0;
   border: 0;
   border-radius: 20px;
   cursor: pointer;
