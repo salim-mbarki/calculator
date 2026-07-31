@@ -37,6 +37,14 @@ function formatNumber(number) {
     return Number(number.toFixed(6))
 }
 
+function handleDecimal(number) {
+    decimalButton.disabled = true;
+    if (!number) {
+        return '0.';
+    }
+    return '.';
+}
+
 let leftNumber = '';
 let rightNumber = '';
 let operator;
@@ -103,16 +111,16 @@ function handleNumber(value) {
     }
 
     if (operator) {
+        if (value === '.') {
+            value = handleDecimal(rightNumber);
+        }
         rightNumber += value;
         display.textContent = formatNumber(+rightNumber);
-        if (value === '.') {
-            decimalButton.disabled = true;
-        }
     } else {
+        if (value === '.') {
+            value = handleDecimal(leftNumber);
+        }
         leftNumber += value;
         display.textContent = formatNumber(+leftNumber);
-        if (value === '.') {
-            decimalButton.disabled = true;
-        }
     }
 }
