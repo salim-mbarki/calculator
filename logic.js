@@ -44,6 +44,7 @@ let result;
 
 const buttons = Array.from(document.querySelectorAll('button'));
 const display = document.querySelector('.display');
+const decimalButton = document.querySelector('.decimal-button');
 
 buttons.forEach(button => {
     button.addEventListener('click', handleClick);
@@ -71,6 +72,7 @@ function clearCalculator() {
     operator = null;
     result = 0;
     display.textContent = 0;
+    decimalButton.disabled = false;
 }
 
 function handleOperator(value) {
@@ -80,6 +82,9 @@ function handleOperator(value) {
         display.textContent = formatNumber(+leftNumber);
     }
     operator = value;
+    if (decimalButton.disabled) {
+        decimalButton.disabled = false;
+    }
 }
 
 function calculate() {
@@ -87,17 +92,27 @@ function calculate() {
     leftNumber = result;
     rightNumber = '';
     display.textContent = formatNumber(result);
+    if (decimalButton.disabled) {
+        decimalButton.disabled = false;
+    }
 }
 
 function handleNumber(value) {
     if (result) {
         clearCalculator();
     }
+
     if (operator) {
         rightNumber += value;
         display.textContent = formatNumber(+rightNumber);
+        if (value === '.') {
+            decimalButton.disabled = true;
+        }
     } else {
         leftNumber += value;
         display.textContent = formatNumber(+leftNumber);
+        if (value === '.') {
+            decimalButton.disabled = true;
+        }
     }
 }
