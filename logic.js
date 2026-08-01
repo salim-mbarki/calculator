@@ -45,35 +45,6 @@ function handleDecimal(number) {
     return '.';
 }
 
-let leftNumber = '';
-let rightNumber = '';
-let operator;
-let result;
-
-const buttons = Array.from(document.querySelectorAll('button'));
-const display = document.querySelector('.display');
-const decimalButton = document.querySelector('.decimal-button');
-
-buttons.forEach(button => {
-    button.addEventListener('click', handleClick);
-})
-
-function handleClick(e) {
-    const value = e.target.textContent;
-
-    if (value === '=' && (!leftNumber || !operator || !rightNumber)) {
-        return;
-    } else if (value === 'CE') {
-        clearCalculator();
-    } else if (['+', '-', '*', '/'].includes(value)) {
-        handleOperator(value);
-    } else if (value === '=') {
-        calculate();
-    } else {
-        handleNumber(value);
-    }
-}
-
 function clearCalculator() {
     leftNumber = '';
     rightNumber = '';
@@ -81,6 +52,16 @@ function clearCalculator() {
     result = 0;
     display.textContent = 0;
     decimalButton.disabled = false;
+}
+
+function deleteLastDigit() {
+    if (leftNumber && !operator) {
+        leftNumber = leftNumber.slice(0, -1);
+        display.textContent = formatNumber(+leftNumber);
+    } else if (rightNumber) {
+        rightNumber = leftNumber.slice(0, -1);
+        display.textContent = formatNumber(+rightNumber);
+    }
 }
 
 function handleOperator(value) {
@@ -122,5 +103,36 @@ function handleNumber(value) {
         }
         leftNumber += value;
         display.textContent = formatNumber(+leftNumber);
+    }
+}
+
+let leftNumber = '';
+let rightNumber = '';
+let operator;
+let result;
+
+const buttons = Array.from(document.querySelectorAll('button'));
+const display = document.querySelector('.display');
+const decimalButton = document.querySelector('.decimal-button');
+
+buttons.forEach(button => {
+    button.addEventListener('click', handleClick);
+})
+
+function handleClick(e) {
+    const value = e.target.textContent;
+
+    if (value === '=' && (!leftNumber || !operator || !rightNumber)) {
+        return;
+    } else if (value === 'CE') {
+        clearCalculator();
+    } else if (value === 'Del') {
+        deleteLastDigit();
+    } else if (['+', '-', '*', '/'].includes(value)) {
+        handleOperator(value);
+    } else if (value === '=') {
+        calculate();
+    } else {
+        handleNumber(value);
     }
 }
